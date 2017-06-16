@@ -1,0 +1,20 @@
+digraph arbol{nodo9654672 [label="SENTENCIAS"];
+nodo9654672 ->nodo9653568;
+nodo9653568 [label="NATIVAS"];
+nodo9653568 ->nodo9654640;
+nodo9654640 [label="DECC_"];
+nodo9653568 ->nodo9730480;
+nodo9730480 [label="E"];
+nodo9730480 ->nodo7591456;
+nodo7591456 [label="E"];
+nodo7591456 ->nodo9749952;
+nodo9749952 [label="NUMERO"];
+nodo9749952 ->nodo9749984;
+nodo9749984 [label="5"];
+nodo9730480 ->nodo9653536;
+nodo9653536 [label="+"];
+nodo9730480 ->nodo9751792;
+nodo9751792 [label="E"];
+nodo9751792 ->nodo9751824;
+nodo9751824 [label="%"];
+}
