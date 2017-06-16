@@ -1,1 +1,1 @@
-$decc$calcular 5+%$$
+decc$%$

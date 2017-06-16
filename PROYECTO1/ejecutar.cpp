@@ -3,8 +3,7 @@
 
 ejecutar::ejecutar()
 {
-        //ultimo->tipo="ERROR";
-        ultimo= new Variable();
+
 
 }
 
@@ -14,17 +13,13 @@ Variable *objeto= new Variable();
     foreach( Nodo* item, raiz->hijos )
     {
 
-       // objeto= new Variable();
-
         if(QString::compare(item->produccion, "E", Qt::CaseInsensitive)==0)
         {
 
             objeto=procesarExpresion(item);
             th->insertPlainText(objeto->valor);
             th->insertPlainText("\n");
-            ultimo= new Variable();
-            ultimo->tipo=objeto->tipo;
-            ultimo->valor=objeto->valor;
+            ejecutar::ultimo=objeto;
 
 
         }else if (QString::compare(item->produccion, "DECLA_FUN", Qt::CaseInsensitive)==0)
@@ -39,19 +34,15 @@ Variable *objeto= new Variable();
                     objeto->valor =QString::number(objeto->valor.toDouble()-1);
                     th->insertPlainText(objeto->valor);
                     th->insertPlainText("\n");
-                    ultimo= new Variable();
-                    ultimo->tipo=objeto->tipo;
-                    ultimo->valor=objeto->valor;
+                    ejecutar::ultimo=objeto;
 
                }else if(QString::compare(item->hijos[0]->produccion,"SUCC_", Qt::CaseInsensitive)==0)
                {
                     objeto=procesarExpresion(item->hijos[1]);
                     objeto->valor =QString::number(objeto->valor.toDouble()+1);
                     th->insertPlainText(objeto->valor);
-                    th->insertPlainText("\n");
-                    ultimo= new Variable();
-                    ultimo->tipo=objeto->tipo;
-                    ultimo->valor=objeto->valor;
+                    th  ->insertPlainText("\n");
+                    ejecutar::ultimo=objeto;
 
                }else if(QString::compare(item->hijos[0]->produccion,"SUCC_", Qt::CaseInsensitive)==0)
                {
@@ -74,7 +65,7 @@ Variable* ejecutar::procesarExpresion(Nodo *raiz)
             nuevo->tipo="NUMBER";
             nuevo->valor=raiz->hijos[0]->hijos[0]->produccion;
             return nuevo;
-        }else if(QString::compare(raiz->produccion,"%", Qt::CaseInsensitive)==0)
+        }else if(QString::compare(raiz->hijos[0]->produccion,"%", Qt::CaseInsensitive)==0)
         {
             std::cout <<"aqui"<< std::endl;
             if(QString::compare(ultimo->tipo,"NUMBER", Qt::CaseInsensitive)==0){

@@ -18,10 +18,11 @@ class ejecutar
 {
 public:
     ejecutar();
-    Variable* ultimo;
+    static Variable* ultimo;
     void procesarHaskell(Nodo *raiz,QPlainTextEdit* th);
     Variable* procesarExpresion(Nodo *raiz);
 
 };
+
 
 #endif // EJECUTAR_H
