@@ -22,7 +22,7 @@
 using namespace std;
 extern Nodo *root;
 extern void mostrarResultado(QWidget* th);
-Variable* ejecutar::ultimo=new Variable();
+//Variable* ejecutar::ultimo=new Variable();
 //extern void mostrarResultadoJ(QWidget* th);
 //extern FILE *ccin;
 //extern nodeTree *root;
@@ -41,6 +41,8 @@ PROYECTO1::PROYECTO1(QWidget *parent) :
     ui->BtnCrearProyecto->setEnabled(false);
     ui->BtnImportar->setEnabled(false);
     ui->BtnPublicar->setEnabled(false);
+
+
 
 }
 

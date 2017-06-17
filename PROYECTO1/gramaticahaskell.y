@@ -99,7 +99,7 @@ class Nodo *nodo;
 %type<nodo> E
 %type<nodo> LLAMADA_FUN
 %type<nodo> PARAMETROS
-//%type<caden> LVAL
+%type<nodo> LVAL
 %type<nodo> DECLA_LISTA
 %type<nodo> LISTA
 %type<nodo> NATIVAS
@@ -111,11 +111,11 @@ class Nodo *nodo;
 %type<nodo> CASE
 %type<nodo> LCASOS
 %type<nodo> CASO
+%left exclamacion
 %left mas menos 
 %left por divi mod
 %right pot sqrt_
 %left concatenacion
-%right exclamacion
 
 %left or_
 %left and_ 
@@ -146,28 +146,30 @@ SENTENCIA		: 	DECLA_LISTA{$$=$1;}
 T 			:	LLAMADA_FUN{$$=$1;}
                         |	NUMERO{$$=$1;}
                         |	NATIVAS{$$=$1;}
-                        |	LISTA{$$=$1;}
+                        |	LISTA{/*std::cout <<"pasa por aqui"<< std::endl;*/$$=$1;}
                         |	LISTA exclamacion NUMERO
                         {
 
                                 Nodo *padre= new Nodo("ACCESO");
                                 padre->hijos.append($1);
                                 padre->hijos.append($3);
+
                                 $$=padre;
-                        }	//acceder a indices
+                        }
                         |	LISTA exclamacion NUMERO exclamacion NUMERO
-                        {
+                        {       //acceder a indices
                                 Nodo *padre= new Nodo("ACCESO");
                                 padre->hijos.append($1);
                                 padre->hijos.append($3);
                                 padre->hijos.append($5);
                                 $$=padre;
-                        }//lista bidimensional*/
+                        }
                         |	porcentaje
                         {       //ultimo valor valido solo en consola
-                                Nodo *padre= new Nodo("E");
-                                padre->hijos.append(new Nodo("%"));
+                                Nodo *padre= new Nodo("%");
+                                //padre->hijos.append(new Nodo("%"));
                                 $$=padre;
+                                //lista bidimensional
                         }
                         |	caracter
                         {
@@ -326,6 +328,7 @@ E 			: 	E mas E
                         {
                                 Nodo *padre= new Nodo("E");
                                 padre->hijos.append($1);
+                                $$=padre;
                         }
                         | 	numero
                         {
@@ -348,7 +351,7 @@ LLAMADA_FUN		:	dolar id llave_abre llave_cierra dolar
                                 padre->hijos.append(new Nodo($2));
                                 $$=padre;
                         }
-			|	dolar id llave_abre PARAMETROS llave_cierra dolar
+                        |	dolar id llave_abre LVAL llave_cierra dolar
                         {
                                 Nodo *padre= new Nodo("LLAMADA_FUN");
                                 padre->hijos.append(new Nodo($2));
@@ -369,9 +372,18 @@ PARAMETROS		: 	PARAMETROS coma E//T
                                  $$=padre;
                         }
 ;		
-/*LVAL			: 	LVAL coma T
-			|	T
-;*/
+LVAL			: 	LVAL coma E
+                        {
+                                $1->hijos.append($3);
+                                $$=$1;
+                        }
+                        |	E
+                        {
+                                 Nodo *padre= new Nodo("PARAMETROS");
+                                 padre->hijos.append($1);
+                                 $$=padre;
+                        }
+;
 DECLA_LISTA		:	dolar let id igual T dolar
                         {
                                 Nodo *padre= new Nodo("DECLA_LISTA");

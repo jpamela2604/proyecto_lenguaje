@@ -456,16 +456,16 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  43
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   356
+#define YYLAST   349
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  55
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  22
+#define YYNNTS  23
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  74
+#define YYNRULES  76
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  159
+#define YYNSTATES  162
 
 /* YYTRANSLATE[YYX] -- Symbol number corresponding to YYX as returned
    by yylex, with out-of-bounds checking.  */
@@ -517,13 +517,13 @@ static const yytype_uint8 yytranslate[] =
 static const yytype_uint16 yyrline[] =
 {
        0,   126,   126,   130,   135,   142,   143,   144,   146,   147,
-     148,   149,   150,   158,   166,   172,   178,   188,   193,   201,
-     209,   215,   224,   230,   235,   240,   245,   250,   256,   264,
-     272,   280,   288,   296,   304,   312,   319,   325,   330,   345,
-     351,   360,   365,   375,   383,   390,   397,   406,   413,   420,
-     427,   434,   441,   449,   457,   465,   472,   479,   486,   494,
-     501,   510,   515,   522,   527,   534,   535,   536,   537,   539,
-     549,   558,   563,   570,   579
+     148,   149,   150,   159,   167,   174,   180,   190,   195,   203,
+     211,   217,   226,   232,   237,   242,   247,   252,   258,   266,
+     274,   282,   290,   298,   306,   314,   321,   327,   333,   348,
+     354,   363,   368,   375,   380,   387,   395,   402,   409,   418,
+     425,   432,   439,   446,   453,   461,   469,   477,   484,   491,
+     498,   506,   513,   522,   527,   534,   539,   546,   547,   548,
+     549,   551,   561,   570,   575,   582,   591
 };
 #endif
 
@@ -541,7 +541,7 @@ static const char *const yytname[] =
   "if_", "then_", "else_", "end", "case_", "dos_puntos", "caracter",
   "cadena", "numero", "id", "porcentaje", "pot", "punto_coma", "$accept",
   "S", "SENTENCIAS", "SENTENCIA", "T", "NUMERO", "CONDICION", "OR", "E",
-  "LLAMADA_FUN", "PARAMETROS", "DECLA_LISTA", "LISTA", "NATIVAS",
+  "LLAMADA_FUN", "PARAMETROS", "LVAL", "DECLA_LISTA", "LISTA", "NATIVAS",
   "DECLA_FUN", "LPARAMS", "CUERPO", "SF", "IF", "CASE", "LCASOS", "CASO", YY_NULLPTR
 };
 #endif
@@ -560,10 +560,10 @@ static const yytype_uint16 yytoknum[] =
 };
 # endif
 
-#define YYPACT_NINF -76
+#define YYPACT_NINF -75
 
 #define yypact_value_is_default(Yystate) \
-  (!!((Yystate) == (-76)))
+  (!!((Yystate) == (-75)))
 
 #define YYTABLE_NINF -1
 
@@ -574,22 +574,23 @@ static const yytype_uint16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
-      18,   147,   212,   -76,   -76,    42,   -76,    26,    18,   -76,
-     -12,   -76,   -76,   -76,    19,   -76,   -76,   147,   147,   305,
-     -76,   -76,   -12,   125,    25,    33,   147,   113,   113,   113,
-     113,   113,   113,   113,   113,   113,   113,   113,   113,    36,
-     277,   -76,    48,   -76,   -76,   113,    62,    -2,    50,   147,
-     147,   147,   147,   147,   147,   147,   -76,   147,    85,    84,
-     112,   120,   143,   146,   160,   186,   194,   230,   244,   248,
-     258,   262,   136,   170,    55,   -12,   -76,   213,   -76,   -76,
-     -76,   277,    75,   -76,   114,   110,   -76,    -2,    -2,    -1,
-      -1,    -1,    -1,    -1,   125,   113,   -76,   -76,   -76,   -76,
-     -76,   -76,   -76,   -76,   -76,   -76,   -76,   -76,   -76,   115,
-      22,   170,    32,   107,    68,   -76,   -76,   231,   -76,    62,
-     272,   -76,   121,   306,     6,   170,   170,   277,   -76,   -76,
-     -76,   -76,   -76,   -76,   147,   100,   116,   144,   -76,   -76,
-     -76,   -76,   -76,   -76,   155,   -76,   245,   125,   277,   277,
-     -76,   -76,   277,   159,   181,   263,   -76,   -76,   -76
+     117,    57,   205,   -75,   -75,    -2,   -75,    26,   117,   -75,
+      20,   -75,   -75,   -75,    63,   -75,   -75,    57,    57,   298,
+     -75,   -75,    20,   127,    68,    65,    57,   262,   262,   262,
+     262,   262,   262,   262,   262,   262,   262,   262,   262,    87,
+     270,   -75,    27,   -75,   -75,   262,   105,    -1,    50,    57,
+      57,    57,    57,    57,    57,    57,   -75,    57,   128,    64,
+     113,   114,   116,   124,   148,   151,   179,   187,   223,   237,
+     241,   251,   141,   163,   102,    20,   -75,   206,   -75,   -75,
+     -75,   270,   110,   -75,   138,   145,   -75,    -1,    -1,    -7,
+      -7,    -7,    -7,    -7,   127,   262,   -75,   -75,   -75,   -75,
+     -75,   -75,   -75,   -75,   -75,   -75,   -75,   -75,   -75,   154,
+     127,    38,   163,    31,   107,    -9,   -75,   -75,   224,   -75,
+     105,   265,   -75,    57,   156,   328,     6,   163,   163,   270,
+     -75,   -75,   -75,   -75,   -75,   -75,    57,   140,   149,    43,
+     -75,   -75,   -75,   -75,   127,   -75,   -75,   173,   -75,   238,
+     127,   270,   270,   -75,   -75,   270,   152,   174,   256,   -75,
+     -75,   -75
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -597,38 +598,39 @@ static const yytype_int16 yypact[] =
      means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       0,     0,     0,    15,    44,    46,    14,     0,     2,     4,
+       0,     0,     0,    15,    46,    48,    14,     0,     2,     4,
        7,     9,     8,     5,    11,    10,     6,     0,     0,     0,
-      38,    46,    37,    42,     0,     0,     0,     0,     0,     0,
+      38,    48,    37,    42,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,    62,     0,     1,     3,     0,     0,    35,     0,     0,
-       0,     0,     0,     0,     0,     0,    45,     0,     0,     0,
+       0,    64,     0,     1,     3,     0,     0,    35,     0,     0,
+       0,     0,     0,     0,     0,     0,    47,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,    68,    67,     0,    64,    65,
-      66,     0,     0,    16,     0,    12,    36,    28,    29,    30,
-      31,    32,    33,    34,    41,     0,    17,    47,    48,    49,
-      50,    51,    52,    54,    55,    56,    57,    58,    53,     0,
-       0,     0,     0,     0,     0,    59,    63,     0,    61,     0,
-       0,    39,     0,     0,     0,     0,     0,     0,    22,    23,
-      24,    25,    26,    27,     0,     0,     0,     0,    72,    60,
-      13,    43,    40,    20,    19,    18,     0,    21,     0,     0,
-      70,    71,     0,     0,     0,     0,    74,    73,    69
+       0,     0,     0,     0,     0,    70,    69,     0,    66,    67,
+      68,     0,     0,    16,     0,    12,    36,    28,    29,    30,
+      31,    32,    33,    34,    41,     0,    17,    49,    50,    51,
+      52,    53,    54,    56,    57,    58,    59,    60,    55,     0,
+      44,     0,     0,     0,     0,     0,    61,    65,     0,    63,
+       0,     0,    39,     0,     0,     0,     0,     0,     0,     0,
+      22,    23,    24,    25,    26,    27,     0,     0,     0,     0,
+      74,    62,    13,    45,    43,    40,    20,    19,    18,     0,
+      21,     0,     0,    72,    73,     0,     0,     0,     0,    76,
+      75,    71
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int16 yypgoto[] =
 {
-     -76,   -76,   -76,   163,     0,   -45,   -17,   -76,    47,   -76,
-     103,    17,   -76,   -76,   -76,   -76,   -66,   -75,   -76,   -76,
-     -76,    35
+     -75,   -75,   -75,   180,     0,   -44,    14,   -75,    47,   -75,
+     -75,   -75,    17,   -75,   -75,   -75,   -75,   -66,   -74,   -75,
+     -75,   -75,    60
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int16 yydefgoto[] =
 {
-      -1,     7,     8,     9,    22,    11,   112,   134,   113,    12,
-      24,    76,    14,    15,    16,    42,    77,    78,    79,    80,
-     137,   138
+      -1,     7,     8,     9,    22,    11,   113,   136,   114,    12,
+      24,   111,    76,    14,    15,    16,    42,    77,    78,    79,
+      80,   139,   140
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -636,82 +638,80 @@ static const yytype_int16 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_uint8 yytable[] =
 {
-      10,    85,   116,    51,    52,    53,    54,    54,    10,    49,
-      50,    51,    52,    53,    54,   117,    86,    13,    45,   128,
-     129,   130,   131,   132,   133,    13,    43,    60,    61,    62,
-      63,    64,    65,    66,    67,    68,    69,    70,    71,     1,
-      75,     2,   116,   125,   126,    83,    57,    56,    23,    57,
-      46,    55,    55,    49,    50,    51,    52,    53,    54,    55,
-      86,   146,    40,   122,    47,    48,     3,     4,    81,     5,
-       6,   116,    82,    59,   140,   127,    72,    75,   116,   116,
-     116,    75,   153,   154,    58,    84,   155,    49,    50,    51,
-      52,    53,    54,    41,   123,   120,    87,    88,    89,    90,
-      91,    92,    93,    55,    94,    95,   114,    96,   144,   145,
-      49,    50,    51,    52,    53,    54,   135,    75,   136,    23,
-     128,   129,   130,   131,   132,   133,   118,    75,    49,    50,
-      51,    52,    53,    54,     1,    97,    19,    55,   121,    26,
-      17,   119,    45,    98,   142,    18,    75,   148,    75,    75,
-      45,    17,    75,    75,    75,    75,    18,     1,   124,    19,
-      55,     3,     4,   149,    21,     6,    99,   126,     1,   100,
-      19,    44,   151,    45,    17,   110,    45,   109,    55,   111,
-       1,   147,     2,   101,     3,     4,    20,    21,     6,   150,
-      45,     1,   135,    19,   136,     3,     4,    20,    21,     6,
-       0,    73,     1,     0,     2,    74,     0,     3,     4,   102,
-      21,     6,     0,   156,     0,     0,    45,   103,     3,     4,
-      20,    21,     6,    73,    45,     0,     0,    74,     0,     3,
-       4,    25,    21,     6,     1,   157,     2,    26,    27,    28,
-      29,    30,     0,     0,    31,    32,    33,    34,    35,    36,
-      37,    38,     1,   104,     2,    73,     0,     0,   115,    74,
-      45,     3,     4,    39,    21,     6,     1,   105,     2,     0,
-       0,   106,     0,    73,    45,     0,   139,    74,    45,     3,
-       4,   107,    21,     6,     1,   108,     2,    73,    45,   152,
-       0,    74,    45,     3,     4,   141,    21,     6,     1,     0,
-       2,     0,    45,     0,     0,    73,     0,     0,   158,    74,
-       0,     3,     4,     0,    21,     6,   143,   125,   126,    73,
-       0,     0,     0,    74,     0,     3,     4,     0,    21,     6,
+      10,    54,    85,   117,    51,    52,    53,    54,    10,    49,
+      50,    51,    52,    53,    54,   118,    86,    13,    40,   130,
+     131,   132,   133,   134,   135,    13,    43,    60,    61,    62,
+      63,    64,    65,    66,    67,    68,    69,    70,    71,   137,
+      75,   138,   127,   128,   117,    83,    55,    81,    23,    41,
+      45,    82,    55,    49,    50,    51,    52,    53,    54,    55,
+      86,    17,   123,   149,    47,    48,    18,    49,    50,    51,
+      52,    53,    54,    59,   129,   117,   142,    75,     1,   124,
+      19,    75,   117,   117,   117,   156,   157,    96,   153,   158,
+      56,   137,    57,   138,    46,   121,    87,    88,    89,    90,
+      91,    92,    93,    55,    94,     3,     4,    20,    21,     6,
+      49,    50,    51,    52,    53,    54,    58,    55,    75,   110,
+     130,   131,   132,   133,   134,   135,   125,    72,    84,    75,
+      49,    50,    51,    52,    53,    54,    97,    98,     1,    99,
+       2,   147,   148,    45,    45,    17,    45,   100,    95,    75,
+      18,    75,    75,   115,    45,    75,    75,    75,    75,   126,
+      55,   119,     1,    26,    19,     3,     4,    17,     5,     6,
+     144,   101,   112,     1,   102,     2,   120,   122,    45,   145,
+      55,    45,   109,   150,     1,   128,    19,   151,    44,     3,
+       4,    20,    21,     6,    73,     1,   152,     2,    74,   154,
+       3,     4,   103,    21,     6,     0,   159,     0,     0,    45,
+     104,     3,     4,    20,    21,     6,    73,    45,     0,     0,
+      74,     0,     3,     4,    25,    21,     6,     1,   160,     2,
       26,    27,    28,    29,    30,     0,     0,    31,    32,    33,
-      34,    35,    36,    37,    38,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,    39
+      34,    35,    36,    37,    38,     1,   105,     2,    73,     0,
+       0,   116,    74,    45,     3,     4,    39,    21,     6,     1,
+     106,     2,     0,     0,   107,     0,    73,    45,     0,   141,
+      74,    45,     3,     4,   108,    21,     6,     1,     0,     2,
+      73,    45,   155,     1,    74,    19,     3,     4,   143,    21,
+       6,     1,     0,     2,     0,    45,     0,     0,    73,     0,
+       0,   161,    74,     0,     3,     4,     0,    21,     6,     0,
+       3,     4,    73,    21,     6,     0,    74,     0,     3,     4,
+       0,    21,     6,    26,    27,    28,    29,    30,     0,     0,
+      31,    32,    33,    34,    35,    36,    37,    38,   146,   127,
+     128,     0,     0,     0,     0,     0,     0,     0,     0,    39
 };
 
 static const yytype_int16 yycheck[] =
 {
-       0,    46,    77,     5,     6,     7,     8,     8,     8,     3,
-       4,     5,     6,     7,     8,    81,    10,     0,    30,    13,
+       0,     8,    46,    77,     5,     6,     7,     8,     8,     3,
+       4,     5,     6,     7,     8,    81,    10,     0,    20,    13,
       14,    15,    16,    17,    18,     8,     0,    27,    28,    29,
-      30,    31,    32,    33,    34,    35,    36,    37,    38,    21,
-      40,    23,   117,    11,    12,    45,    24,    22,     1,    24,
-      31,    53,    53,     3,     4,     5,     6,     7,     8,    53,
-      10,   127,    20,    41,    17,    18,    48,    49,    20,    51,
-      52,   146,    24,    26,   119,    43,    40,    77,   153,   154,
-     155,    81,   148,   149,    51,    23,   152,     3,     4,     5,
-       6,     7,     8,    51,   111,    95,    49,    50,    51,    52,
-      53,    54,    55,    53,    57,    20,    51,    23,   125,   126,
-       3,     4,     5,     6,     7,     8,    48,   117,    50,    72,
-      13,    14,    15,    16,    17,    18,    51,   127,     3,     4,
-       5,     6,     7,     8,    21,    23,    23,    53,    23,    25,
-       4,    31,    30,    23,    23,     9,   146,    47,   148,   149,
-      30,     4,   152,   153,   154,   155,     9,    21,   111,    23,
-      53,    48,    49,    47,    51,    52,    23,    12,    21,    23,
-      23,     8,   137,    30,     4,    72,    30,    41,    53,     9,
-      21,   134,    23,    23,    48,    49,    50,    51,    52,    45,
-      30,    21,    48,    23,    50,    48,    49,    50,    51,    52,
-      -1,    42,    21,    -1,    23,    46,    -1,    48,    49,    23,
-      51,    52,    -1,    54,    -1,    -1,    30,    23,    48,    49,
-      50,    51,    52,    42,    30,    -1,    -1,    46,    -1,    48,
-      49,    19,    51,    52,    21,    54,    23,    25,    26,    27,
-      28,    29,    -1,    -1,    32,    33,    34,    35,    36,    37,
-      38,    39,    21,    23,    23,    42,    -1,    -1,    45,    46,
-      30,    48,    49,    51,    51,    52,    21,    23,    23,    -1,
-      -1,    23,    -1,    42,    30,    -1,    45,    46,    30,    48,
-      49,    23,    51,    52,    21,    23,    23,    42,    30,    44,
-      -1,    46,    30,    48,    49,    23,    51,    52,    21,    -1,
-      23,    -1,    30,    -1,    -1,    42,    -1,    -1,    45,    46,
-      -1,    48,    49,    -1,    51,    52,    10,    11,    12,    42,
-      -1,    -1,    -1,    46,    -1,    48,    49,    -1,    51,    52,
+      30,    31,    32,    33,    34,    35,    36,    37,    38,    48,
+      40,    50,    11,    12,   118,    45,    53,    20,     1,    51,
+      30,    24,    53,     3,     4,     5,     6,     7,     8,    53,
+      10,     4,    24,   129,    17,    18,     9,     3,     4,     5,
+       6,     7,     8,    26,    43,   149,   120,    77,    21,    41,
+      23,    81,   156,   157,   158,   151,   152,    23,    45,   155,
+      22,    48,    24,    50,    31,    95,    49,    50,    51,    52,
+      53,    54,    55,    53,    57,    48,    49,    50,    51,    52,
+       3,     4,     5,     6,     7,     8,    51,    53,   118,    72,
+      13,    14,    15,    16,    17,    18,   112,    40,    23,   129,
+       3,     4,     5,     6,     7,     8,    23,    23,    21,    23,
+      23,   127,   128,    30,    30,     4,    30,    23,    20,   149,
+       9,   151,   152,    51,    30,   155,   156,   157,   158,   112,
+      53,    51,    21,    25,    23,    48,    49,     4,    51,    52,
+     123,    23,     9,    21,    23,    23,    31,    23,    30,    23,
+      53,    30,    41,   136,    21,    12,    23,    47,     8,    48,
+      49,    50,    51,    52,    42,    21,    47,    23,    46,   139,
+      48,    49,    23,    51,    52,    -1,    54,    -1,    -1,    30,
+      23,    48,    49,    50,    51,    52,    42,    30,    -1,    -1,
+      46,    -1,    48,    49,    19,    51,    52,    21,    54,    23,
       25,    26,    27,    28,    29,    -1,    -1,    32,    33,    34,
-      35,    36,    37,    38,    39,    -1,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,    51
+      35,    36,    37,    38,    39,    21,    23,    23,    42,    -1,
+      -1,    45,    46,    30,    48,    49,    51,    51,    52,    21,
+      23,    23,    -1,    -1,    23,    -1,    42,    30,    -1,    45,
+      46,    30,    48,    49,    23,    51,    52,    21,    -1,    23,
+      42,    30,    44,    21,    46,    23,    48,    49,    23,    51,
+      52,    21,    -1,    23,    -1,    30,    -1,    -1,    42,    -1,
+      -1,    45,    46,    -1,    48,    49,    -1,    51,    52,    -1,
+      48,    49,    42,    51,    52,    -1,    46,    -1,    48,    49,
+      -1,    51,    52,    25,    26,    27,    28,    29,    -1,    -1,
+      32,    33,    34,    35,    36,    37,    38,    39,    10,    11,
+      12,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    51
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
@@ -719,21 +719,22 @@ static const yytype_int16 yycheck[] =
 static const yytype_uint8 yystos[] =
 {
        0,    21,    23,    48,    49,    51,    52,    56,    57,    58,
-      59,    60,    64,    66,    67,    68,    69,     4,     9,    23,
+      59,    60,    64,    67,    68,    69,    70,     4,     9,    23,
       50,    51,    59,    63,    65,    19,    25,    26,    27,    28,
       29,    32,    33,    34,    35,    36,    37,    38,    39,    51,
-      20,    51,    70,     0,    58,    30,    31,    63,    63,     3,
+      20,    51,    71,     0,    58,    30,    31,    63,    63,     3,
        4,     5,     6,     7,     8,    53,    22,    24,    51,    63,
       59,    59,    59,    59,    59,    59,    59,    59,    59,    59,
-      59,    59,    40,    42,    46,    59,    66,    71,    72,    73,
-      74,    20,    24,    59,    23,    60,    10,    63,    63,    63,
+      59,    59,    40,    42,    46,    59,    67,    72,    73,    74,
+      75,    20,    24,    59,    23,    60,    10,    63,    63,    63,
       63,    63,    63,    63,    63,    20,    23,    23,    23,    23,
       23,    23,    23,    23,    23,    23,    23,    23,    23,    41,
-      65,     9,    61,    63,    51,    45,    72,    71,    51,    31,
-      59,    23,    41,    61,    63,    11,    12,    43,    13,    14,
-      15,    16,    17,    18,    62,    48,    50,    75,    76,    45,
-      60,    23,    23,    10,    61,    61,    71,    63,    47,    47,
-      45,    76,    44,    71,    71,    71,    54,    54,    45
+      63,    66,     9,    61,    63,    51,    45,    73,    72,    51,
+      31,    59,    23,    24,    41,    61,    63,    11,    12,    43,
+      13,    14,    15,    16,    17,    18,    62,    48,    50,    76,
+      77,    45,    60,    23,    63,    23,    10,    61,    61,    72,
+      63,    47,    47,    45,    77,    44,    72,    72,    72,    54,
+      54,    45
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
@@ -743,10 +744,10 @@ static const yytype_uint8 yyr1[] =
       59,    59,    59,    59,    59,    59,    59,    60,    61,    61,
       61,    61,    62,    62,    62,    62,    62,    62,    63,    63,
       63,    63,    63,    63,    63,    63,    63,    63,    63,    64,
-      64,    65,    65,    66,    67,    67,    67,    68,    68,    68,
-      68,    68,    68,    68,    68,    68,    68,    68,    68,    69,
-      69,    70,    70,    71,    71,    72,    72,    72,    72,    73,
-      74,    75,    75,    76,    76
+      64,    65,    65,    66,    66,    67,    68,    68,    68,    69,
+      69,    69,    69,    69,    69,    69,    69,    69,    69,    69,
+      69,    70,    70,    71,    71,    72,    72,    73,    73,    73,
+      73,    74,    75,    76,    76,    77,    77
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
@@ -756,10 +757,10 @@ static const yytype_uint8 yyr2[] =
        1,     1,     3,     5,     1,     1,     3,     4,     3,     3,
        3,     3,     1,     1,     1,     1,     1,     1,     3,     3,
        3,     3,     3,     3,     3,     2,     3,     1,     1,     5,
-       6,     3,     1,     6,     1,     3,     1,     4,     4,     4,
+       6,     3,     1,     3,     1,     6,     1,     3,     1,     4,
        4,     4,     4,     4,     4,     4,     4,     4,     4,     4,
-       5,     3,     1,     2,     1,     1,     1,     1,     1,     7,
-       4,     2,     1,     4,     4
+       4,     4,     5,     3,     1,     2,     1,     1,     1,     1,
+       1,     7,     4,     2,     1,     4,     4
 };
 
 
@@ -1440,7 +1441,7 @@ yyreduce:
     {re ="termino haskells2";
 
                                 root=(yyvsp[0].nodo);(yyval.nodo)=(yyvsp[0].nodo);}
-#line 1444 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1445 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 3:
@@ -1449,7 +1450,7 @@ yyreduce:
                                 (yyvsp[-1].nodo)->hijos.append((yyvsp[0].nodo));
                                 (yyval.nodo)=(yyvsp[-1].nodo);
                         }
-#line 1453 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1454 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 4:
@@ -1459,49 +1460,49 @@ yyreduce:
                                 padre->hijos.append((yyvsp[0].nodo));
                                 (yyval.nodo)=padre;
                         }
-#line 1463 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1464 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 5:
 #line 142 "gramaticahaskell.y" /* yacc.c:1646  */
     {(yyval.nodo)=(yyvsp[0].nodo);}
-#line 1469 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1470 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 6:
 #line 143 "gramaticahaskell.y" /* yacc.c:1646  */
     {(yyval.nodo)=(yyvsp[0].nodo);}
-#line 1475 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1476 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 7:
 #line 144 "gramaticahaskell.y" /* yacc.c:1646  */
     {(yyval.nodo)=(yyvsp[0].nodo);}
-#line 1481 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1482 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 8:
 #line 146 "gramaticahaskell.y" /* yacc.c:1646  */
     {(yyval.nodo)=(yyvsp[0].nodo);}
-#line 1487 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1488 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 9:
 #line 147 "gramaticahaskell.y" /* yacc.c:1646  */
     {(yyval.nodo)=(yyvsp[0].nodo);}
-#line 1493 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1494 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 10:
 #line 148 "gramaticahaskell.y" /* yacc.c:1646  */
     {(yyval.nodo)=(yyvsp[0].nodo);}
-#line 1499 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1500 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 11:
 #line 149 "gramaticahaskell.y" /* yacc.c:1646  */
-    {(yyval.nodo)=(yyvsp[0].nodo);}
-#line 1505 "gramaticahaskell.cpp" /* yacc.c:1646  */
+    {/*std::cout <<"pasa por aqui"<< std::endl;*/(yyval.nodo)=(yyvsp[0].nodo);}
+#line 1506 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 12:
@@ -1511,45 +1512,47 @@ yyreduce:
                                 Nodo *padre= new Nodo("ACCESO");
                                 padre->hijos.append((yyvsp[-2].nodo));
                                 padre->hijos.append((yyvsp[0].nodo));
+
                                 (yyval.nodo)=padre;
                         }
-#line 1517 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1519 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 159 "gramaticahaskell.y" /* yacc.c:1646  */
-    {
+#line 160 "gramaticahaskell.y" /* yacc.c:1646  */
+    {       //acceder a indices
                                 Nodo *padre= new Nodo("ACCESO");
                                 padre->hijos.append((yyvsp[-4].nodo));
                                 padre->hijos.append((yyvsp[-2].nodo));
                                 padre->hijos.append((yyvsp[0].nodo));
                                 (yyval.nodo)=padre;
                         }
-#line 1529 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1531 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 167 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 168 "gramaticahaskell.y" /* yacc.c:1646  */
     {       //ultimo valor valido solo en consola
-                                Nodo *padre= new Nodo("E");
-                                padre->hijos.append(new Nodo("%"));
+                                Nodo *padre= new Nodo("%");
+                                //padre->hijos.append(new Nodo("%"));
                                 (yyval.nodo)=padre;
+                                //lista bidimensional
                         }
-#line 1539 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1542 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 15:
-#line 173 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 175 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("CARACTER");
                                 padre->hijos.append(new Nodo((yyvsp[0].caden)));
                                 (yyval.nodo)=padre;
                         }
-#line 1549 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1552 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 16:
-#line 179 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 181 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("LISTA");
                                 padre->hijos.append(new Nodo("CONCATENACION"));
@@ -1557,19 +1560,19 @@ yyreduce:
                                 padre->hijos.append((yyvsp[0].nodo));
                                 (yyval.nodo)=padre;
                          }
-#line 1561 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1564 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 17:
-#line 189 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 191 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 (yyval.nodo)=(yyvsp[-1].nodo);
                         }
-#line 1569 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1572 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 194 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 196 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("COND");
                                 padre->hijos.append((yyvsp[-2].nodo));
@@ -1577,11 +1580,11 @@ yyreduce:
                                 padre->hijos.append((yyvsp[0].nodo));
                                 (yyval.nodo)=padre;
                         }
-#line 1581 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1584 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 19:
-#line 202 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 204 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("COND");
                                 padre->hijos.append((yyvsp[-2].nodo));
@@ -1589,21 +1592,21 @@ yyreduce:
                                 padre->hijos.append((yyvsp[0].nodo));
                                 (yyval.nodo)=padre;
                         }
-#line 1593 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1596 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 20:
-#line 210 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 212 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("COND");
                                 padre->hijos.append((yyvsp[-1].nodo));
                                 (yyval.nodo)=padre;
                         }
-#line 1603 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1606 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 21:
-#line 216 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 218 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("COND");
                                 padre->hijos.append((yyvsp[-2].nodo));
@@ -1611,66 +1614,66 @@ yyreduce:
                                 padre->hijos.append((yyvsp[0].nodo));
                                 (yyval.nodo)=padre;
                         }
-#line 1615 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1618 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 22:
-#line 225 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 227 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo(">");
                                 (yyval.nodo)=padre;
 
                         }
-#line 1625 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1628 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 23:
-#line 231 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 233 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("<");
                                 (yyval.nodo)=padre;
                         }
-#line 1634 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1637 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 24:
-#line 236 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 238 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo(">=");
                                 (yyval.nodo)=padre;
                         }
-#line 1643 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1646 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 25:
-#line 241 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 243 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("<=");
                                 (yyval.nodo)=padre;
                         }
-#line 1652 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1655 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 26:
-#line 246 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 248 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("==");
                                 (yyval.nodo)=padre;
                         }
-#line 1661 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1664 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 27:
-#line 251 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 253 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("!=");
                                 (yyval.nodo)=padre;
                         }
-#line 1670 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1673 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 28:
-#line 257 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 259 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("E");
                                 padre->hijos.append((yyvsp[-2].nodo));
@@ -1678,11 +1681,11 @@ yyreduce:
                                 padre->hijos.append((yyvsp[0].nodo));
                                 (yyval.nodo)=padre;
                         }
-#line 1682 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1685 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 29:
-#line 265 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 267 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("E");
                                 padre->hijos.append((yyvsp[-2].nodo));
@@ -1690,11 +1693,11 @@ yyreduce:
                                 padre->hijos.append((yyvsp[0].nodo));
                                 (yyval.nodo)=padre;
                         }
-#line 1694 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1697 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 30:
-#line 273 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 275 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("E");
                                 padre->hijos.append((yyvsp[-2].nodo));
@@ -1702,11 +1705,11 @@ yyreduce:
                                 padre->hijos.append((yyvsp[0].nodo));
                                 (yyval.nodo)=padre;
                         }
-#line 1706 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1709 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 31:
-#line 281 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 283 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("E");
                                 padre->hijos.append((yyvsp[-2].nodo));
@@ -1714,11 +1717,11 @@ yyreduce:
                                 padre->hijos.append((yyvsp[0].nodo));
                                 (yyval.nodo)=padre;
                         }
-#line 1718 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1721 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 32:
-#line 289 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 291 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("E");
                                 padre->hijos.append((yyvsp[-2].nodo));
@@ -1726,11 +1729,11 @@ yyreduce:
                                 padre->hijos.append((yyvsp[0].nodo));
                                 (yyval.nodo)=padre;
                         }
-#line 1730 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1733 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 33:
-#line 297 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 299 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("E");
                                 padre->hijos.append((yyvsp[-2].nodo));
@@ -1738,11 +1741,11 @@ yyreduce:
                                 padre->hijos.append((yyvsp[0].nodo));
                                 (yyval.nodo)=padre;
                         }
-#line 1742 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1745 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 34:
-#line 305 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 307 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("E");
                                 padre->hijos.append((yyvsp[-2].nodo));
@@ -1750,41 +1753,42 @@ yyreduce:
                                 padre->hijos.append((yyvsp[0].nodo));
                                 (yyval.nodo)=padre;
                         }
-#line 1754 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1757 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 35:
-#line 313 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 315 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("E");
                                 padre->hijos.append(new Nodo("-"));
                                 padre->hijos.append((yyvsp[0].nodo));
                                 (yyval.nodo)=padre;
                         }
-#line 1765 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1768 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 320 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 322 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("E");
                                 padre->hijos.append((yyvsp[-1].nodo));
                                 (yyval.nodo)=padre;
                         }
-#line 1775 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1778 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 326 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 328 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("E");
                                 padre->hijos.append((yyvsp[0].nodo));
+                                (yyval.nodo)=padre;
                         }
-#line 1784 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1788 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 38:
-#line 331 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 334 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("E");
                                 Nodo *hijo = new Nodo("NUMERO");
@@ -1792,21 +1796,21 @@ yyreduce:
                                 padre->hijos.append(hijo);
                                 (yyval.nodo)=padre;
                         }
-#line 1796 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1800 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 39:
-#line 346 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 349 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("LLAMADA_FUN");
                                 padre->hijos.append(new Nodo((yyvsp[-3].caden)));
                                 (yyval.nodo)=padre;
                         }
-#line 1806 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1810 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 352 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 355 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("LLAMADA_FUN");
                                 padre->hijos.append(new Nodo((yyvsp[-4].caden)));
@@ -1814,78 +1818,74 @@ yyreduce:
                                 (yyval.nodo)=padre;
 
                         }
-#line 1818 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1822 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 361 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 364 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 (yyvsp[-2].nodo)->hijos.append((yyvsp[0].nodo));
                                 (yyval.nodo)=(yyvsp[-2].nodo);
                         }
-#line 1827 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1831 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 42:
-#line 366 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 369 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                  Nodo *padre= new Nodo("PARAMETROS");
                                  padre->hijos.append((yyvsp[0].nodo));
                                  (yyval.nodo)=padre;
                         }
-#line 1837 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1841 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 43:
 #line 376 "gramaticahaskell.y" /* yacc.c:1646  */
+    {
+                                (yyvsp[-2].nodo)->hijos.append((yyvsp[0].nodo));
+                                (yyval.nodo)=(yyvsp[-2].nodo);
+                        }
+#line 1850 "gramaticahaskell.cpp" /* yacc.c:1646  */
+    break;
+
+  case 44:
+#line 381 "gramaticahaskell.y" /* yacc.c:1646  */
+    {
+                                 Nodo *padre= new Nodo("PARAMETROS");
+                                 padre->hijos.append((yyvsp[0].nodo));
+                                 (yyval.nodo)=padre;
+                        }
+#line 1860 "gramaticahaskell.cpp" /* yacc.c:1646  */
+    break;
+
+  case 45:
+#line 388 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("DECLA_LISTA");
                                 padre->hijos.append(new Nodo((yyvsp[-3].caden)));
                                 padre->hijos.append((yyvsp[-1].nodo));
                                 (yyval.nodo)=padre;
                         }
-#line 1848 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1871 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
-  case 44:
-#line 384 "gramaticahaskell.y" /* yacc.c:1646  */
+  case 46:
+#line 396 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("LISTA");
                                 padre->hijos.append(new Nodo("CADENA"));
                                 padre->hijos.append(new Nodo((yyvsp[0].caden)));
                                 (yyval.nodo)=padre;
                         }
-#line 1859 "gramaticahaskell.cpp" /* yacc.c:1646  */
-    break;
-
-  case 45:
-#line 391 "gramaticahaskell.y" /* yacc.c:1646  */
-    {
-                                Nodo *padre= new Nodo("LISTA");
-                                padre->hijos.append(new Nodo("DEFICION"));
-                                padre->hijos.append((yyvsp[-1].nodo));
-                                (yyval.nodo)=padre;
-                        }
-#line 1870 "gramaticahaskell.cpp" /* yacc.c:1646  */
-    break;
-
-  case 46:
-#line 398 "gramaticahaskell.y" /* yacc.c:1646  */
-    {
-                                Nodo *padre= new Nodo("LISTA");
-                                padre->hijos.append(new Nodo("ID"));
-                                padre->hijos.append(new Nodo((yyvsp[0].caden)));
-                                (yyval.nodo)=padre;
-
-                        }
 #line 1882 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 47:
-#line 407 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 403 "gramaticahaskell.y" /* yacc.c:1646  */
     {
-                                Nodo *padre= new Nodo("NATIVAS");
-                                padre->hijos.append(new Nodo("SUCC_"));
+                                Nodo *padre= new Nodo("LISTA");
+                                padre->hijos.append(new Nodo("DEFICION"));
                                 padre->hijos.append((yyvsp[-1].nodo));
                                 (yyval.nodo)=padre;
                         }
@@ -1893,51 +1893,74 @@ yyreduce:
     break;
 
   case 48:
-#line 414 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 410 "gramaticahaskell.y" /* yacc.c:1646  */
+    {
+                                Nodo *padre= new Nodo("LISTA");
+                                padre->hijos.append(new Nodo("ID"));
+                                padre->hijos.append(new Nodo((yyvsp[0].caden)));
+                                (yyval.nodo)=padre;
+
+                        }
+#line 1905 "gramaticahaskell.cpp" /* yacc.c:1646  */
+    break;
+
+  case 49:
+#line 419 "gramaticahaskell.y" /* yacc.c:1646  */
+    {
+                                Nodo *padre= new Nodo("NATIVAS");
+                                padre->hijos.append(new Nodo("SUCC_"));
+                                padre->hijos.append((yyvsp[-1].nodo));
+                                (yyval.nodo)=padre;
+                        }
+#line 1916 "gramaticahaskell.cpp" /* yacc.c:1646  */
+    break;
+
+  case 50:
+#line 426 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("NATIVAS");
                                 padre->hijos.append(new Nodo("DECC_"));
                                 padre->hijos.append((yyvsp[-1].nodo));
                                 (yyval.nodo)=padre;
                         }
-#line 1904 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1927 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
-  case 49:
-#line 421 "gramaticahaskell.y" /* yacc.c:1646  */
+  case 51:
+#line 433 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("NATIVAS");
                                 padre->hijos.append(new Nodo("MIN"));
                                 padre->hijos.append((yyvsp[-1].nodo));
                                 (yyval.nodo)=padre;
                         }
-#line 1915 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1938 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
-  case 50:
-#line 428 "gramaticahaskell.y" /* yacc.c:1646  */
+  case 52:
+#line 440 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("NATIVAS");
                                 padre->hijos.append(new Nodo("MAX"));
                                 padre->hijos.append((yyvsp[-1].nodo));
                                 (yyval.nodo)=padre;
                         }
-#line 1926 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1949 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
-  case 51:
-#line 435 "gramaticahaskell.y" /* yacc.c:1646  */
+  case 53:
+#line 447 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("NATIVAS");
                                 padre->hijos.append(new Nodo("SUM"));
                                 padre->hijos.append((yyvsp[-1].nodo));
                                 (yyval.nodo)=padre;
                         }
-#line 1937 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1960 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
-  case 52:
-#line 442 "gramaticahaskell.y" /* yacc.c:1646  */
+  case 54:
+#line 454 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("NATIVAS");
                                 padre->hijos.append(new Nodo("PRODUCT"));
@@ -1945,11 +1968,11 @@ yyreduce:
                                 (yyval.nodo)=padre;
 
                         }
-#line 1949 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1972 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
-  case 53:
-#line 450 "gramaticahaskell.y" /* yacc.c:1646  */
+  case 55:
+#line 462 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("NATIVAS");
                                 padre->hijos.append(new Nodo("LENGTH"));
@@ -1957,11 +1980,11 @@ yyreduce:
                                 (yyval.nodo)=padre;
 
                         }
-#line 1961 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1984 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
-  case 54:
-#line 458 "gramaticahaskell.y" /* yacc.c:1646  */
+  case 56:
+#line 470 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("NATIVAS");
                                 padre->hijos.append(new Nodo("REVERS"));
@@ -1969,70 +1992,47 @@ yyreduce:
                                 (yyval.nodo)=padre;
 
                         }
-#line 1973 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 1996 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
-  case 55:
-#line 466 "gramaticahaskell.y" /* yacc.c:1646  */
+  case 57:
+#line 478 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("NATIVAS");
                                 padre->hijos.append(new Nodo("IMPR"));
                                 padre->hijos.append((yyvsp[-1].nodo));
                                 (yyval.nodo)=padre;
                         }
-#line 1984 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 2007 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
-  case 56:
-#line 473 "gramaticahaskell.y" /* yacc.c:1646  */
+  case 58:
+#line 485 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("NATIVAS");
                                 padre->hijos.append(new Nodo("PAR"));
                                 padre->hijos.append((yyvsp[-1].nodo));
                                 (yyval.nodo)=padre;
                         }
-#line 1995 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 2018 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
-  case 57:
-#line 480 "gramaticahaskell.y" /* yacc.c:1646  */
+  case 59:
+#line 492 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("NATIVAS");
                                 padre->hijos.append(new Nodo("ASC"));
                                 padre->hijos.append((yyvsp[-1].nodo));
                                 (yyval.nodo)=padre;
                         }
-#line 2006 "gramaticahaskell.cpp" /* yacc.c:1646  */
-    break;
-
-  case 58:
-#line 487 "gramaticahaskell.y" /* yacc.c:1646  */
-    {
-                                Nodo *padre= new Nodo("NATIVAS");
-                                padre->hijos.append(new Nodo("DESC"));
-                                padre->hijos.append((yyvsp[-1].nodo));
-                                (yyval.nodo)=padre;
-                        }
-#line 2017 "gramaticahaskell.cpp" /* yacc.c:1646  */
-    break;
-
-  case 59:
-#line 495 "gramaticahaskell.y" /* yacc.c:1646  */
-    {
-                                Nodo *padre= new Nodo("DECLA_FUN");
-                                padre->hijos.append(new Nodo((yyvsp[-3].caden)));
-                                padre->hijos.append((yyvsp[-1].nodo));
-                                (yyval.nodo)=padre;
-                        }
-#line 2028 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 2029 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 60:
-#line 502 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 499 "gramaticahaskell.y" /* yacc.c:1646  */
     {
-                                Nodo *padre= new Nodo("DECLA_FUN");
-                                padre->hijos.append(new Nodo((yyvsp[-4].caden)));
-                                padre->hijos.append((yyvsp[-3].nodo));
+                                Nodo *padre= new Nodo("NATIVAS");
+                                padre->hijos.append(new Nodo("DESC"));
                                 padre->hijos.append((yyvsp[-1].nodo));
                                 (yyval.nodo)=padre;
                         }
@@ -2040,69 +2040,92 @@ yyreduce:
     break;
 
   case 61:
-#line 511 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 507 "gramaticahaskell.y" /* yacc.c:1646  */
     {
-                                (yyvsp[-2].nodo)->hijos.append(new Nodo((yyvsp[0].caden)));
-                                (yyval.nodo)=(yyvsp[-2].nodo);
+                                Nodo *padre= new Nodo("DECLA_FUN");
+                                padre->hijos.append(new Nodo((yyvsp[-3].caden)));
+                                padre->hijos.append((yyvsp[-1].nodo));
+                                (yyval.nodo)=padre;
                         }
-#line 2049 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 2051 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 62:
-#line 516 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 514 "gramaticahaskell.y" /* yacc.c:1646  */
     {
-                                Nodo *padre= new Nodo("LPARAMS");
-                                padre->hijos.append(new Nodo((yyvsp[0].caden)));
+                                Nodo *padre= new Nodo("DECLA_FUN");
+                                padre->hijos.append(new Nodo((yyvsp[-4].caden)));
+                                padre->hijos.append((yyvsp[-3].nodo));
+                                padre->hijos.append((yyvsp[-1].nodo));
                                 (yyval.nodo)=padre;
                         }
-#line 2059 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 2063 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 63:
 #line 523 "gramaticahaskell.y" /* yacc.c:1646  */
     {
-                                (yyvsp[-1].nodo)->hijos.append((yyvsp[0].nodo));
-                                (yyval.nodo)=(yyvsp[-1].nodo);
+                                (yyvsp[-2].nodo)->hijos.append(new Nodo((yyvsp[0].caden)));
+                                (yyval.nodo)=(yyvsp[-2].nodo);
                         }
-#line 2068 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 2072 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 64:
 #line 528 "gramaticahaskell.y" /* yacc.c:1646  */
     {
+                                Nodo *padre= new Nodo("LPARAMS");
+                                padre->hijos.append(new Nodo((yyvsp[0].caden)));
+                                (yyval.nodo)=padre;
+                        }
+#line 2082 "gramaticahaskell.cpp" /* yacc.c:1646  */
+    break;
+
+  case 65:
+#line 535 "gramaticahaskell.y" /* yacc.c:1646  */
+    {
+                                (yyvsp[-1].nodo)->hijos.append((yyvsp[0].nodo));
+                                (yyval.nodo)=(yyvsp[-1].nodo);
+                        }
+#line 2091 "gramaticahaskell.cpp" /* yacc.c:1646  */
+    break;
+
+  case 66:
+#line 540 "gramaticahaskell.y" /* yacc.c:1646  */
+    {
                                 Nodo *padre= new Nodo("CUERPO");
                                 padre->hijos.append((yyvsp[0].nodo));
                                 (yyval.nodo)=padre;
                         }
-#line 2078 "gramaticahaskell.cpp" /* yacc.c:1646  */
-    break;
-
-  case 65:
-#line 534 "gramaticahaskell.y" /* yacc.c:1646  */
-    {(yyval.nodo)=(yyvsp[0].nodo);}
-#line 2084 "gramaticahaskell.cpp" /* yacc.c:1646  */
-    break;
-
-  case 66:
-#line 535 "gramaticahaskell.y" /* yacc.c:1646  */
-    {(yyval.nodo)=(yyvsp[0].nodo);}
-#line 2090 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 2101 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 67:
-#line 536 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 546 "gramaticahaskell.y" /* yacc.c:1646  */
     {(yyval.nodo)=(yyvsp[0].nodo);}
-#line 2096 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 2107 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 68:
-#line 537 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 547 "gramaticahaskell.y" /* yacc.c:1646  */
     {(yyval.nodo)=(yyvsp[0].nodo);}
-#line 2102 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 2113 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
   case 69:
-#line 540 "gramaticahaskell.y" /* yacc.c:1646  */
+#line 548 "gramaticahaskell.y" /* yacc.c:1646  */
+    {(yyval.nodo)=(yyvsp[0].nodo);}
+#line 2119 "gramaticahaskell.cpp" /* yacc.c:1646  */
+    break;
+
+  case 70:
+#line 549 "gramaticahaskell.y" /* yacc.c:1646  */
+    {(yyval.nodo)=(yyvsp[0].nodo);}
+#line 2125 "gramaticahaskell.cpp" /* yacc.c:1646  */
+    break;
+
+  case 71:
+#line 552 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("IF");
                                 padre->hijos.append((yyvsp[-5].nodo));
@@ -2111,11 +2134,11 @@ yyreduce:
                                 (yyval.nodo)=padre;
 
                         }
-#line 2115 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 2138 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
-  case 70:
-#line 550 "gramaticahaskell.y" /* yacc.c:1646  */
+  case 72:
+#line 562 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("CASE");
                                 padre->hijos.append(new Nodo((yyvsp[-2].caden)));
@@ -2123,30 +2146,30 @@ yyreduce:
                                 (yyval.nodo)=padre;
 
                         }
-#line 2127 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 2150 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
-  case 71:
-#line 559 "gramaticahaskell.y" /* yacc.c:1646  */
+  case 73:
+#line 571 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 (yyvsp[-1].nodo)->hijos.append((yyvsp[0].nodo));
                                 (yyval.nodo)=(yyvsp[-1].nodo);
                         }
-#line 2136 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 2159 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
-  case 72:
-#line 564 "gramaticahaskell.y" /* yacc.c:1646  */
+  case 74:
+#line 576 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("CASOS");
                                 padre->hijos.append((yyvsp[0].nodo));
                                 (yyval.nodo)=padre;
                         }
-#line 2146 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 2169 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
-  case 73:
-#line 571 "gramaticahaskell.y" /* yacc.c:1646  */
+  case 75:
+#line 583 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("CASO");
                                 Nodo *hijo= new Nodo("NUMERO");
@@ -2155,11 +2178,11 @@ yyreduce:
                                 padre->hijos.append((yyvsp[-1].nodo));
                                 (yyval.nodo)=padre;
                         }
-#line 2159 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 2182 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
-  case 74:
-#line 580 "gramaticahaskell.y" /* yacc.c:1646  */
+  case 76:
+#line 592 "gramaticahaskell.y" /* yacc.c:1646  */
     {
                                 Nodo *padre= new Nodo("CASO");
                                 Nodo *hijo= new Nodo("CARACTER");
@@ -2168,11 +2191,11 @@ yyreduce:
                                 padre->hijos.append((yyvsp[-1].nodo));
                                 (yyval.nodo)=padre;
                         }
-#line 2172 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 2195 "gramaticahaskell.cpp" /* yacc.c:1646  */
     break;
 
 
-#line 2176 "gramaticahaskell.cpp" /* yacc.c:1646  */
+#line 2199 "gramaticahaskell.cpp" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2400,7 +2423,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 590 "gramaticahaskell.y" /* yacc.c:1906  */
+#line 602 "gramaticahaskell.y" /* yacc.c:1906  */
 
 void mostrarResultado(QWidget* th) {
  QMessageBox::information(th,"Resultado",re);

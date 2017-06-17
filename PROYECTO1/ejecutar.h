@@ -21,6 +21,13 @@ public:
     static Variable* ultimo;
     void procesarHaskell(Nodo *raiz,QPlainTextEdit* th);
     Variable* procesarExpresion(Nodo *raiz);
+    /*      NATIVOS         */
+    Variable* Nativo_Succ(Variable* objeto);
+    Variable* Nativo_Decc(Variable* objeto);
+    Variable* Nativo_Min(Nodo* raiz);
+    /*Variable* Nativo_Max(Nodo* raiz);
+    Variable* Nativo_Length(Nodo* raiz);*/
+
 
 };
 

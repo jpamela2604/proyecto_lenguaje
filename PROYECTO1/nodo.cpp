@@ -23,6 +23,7 @@ void Nodo::graficar(Nodo *raiz){
 }
 void Nodo::recorrer(Nodo *raiz, FILE *f){
     if(raiz!=NULL){
+         raiz->produccion.replace("\""," ");
         fprintf(f,"nodo%d [label=\"%s\"];\n",raiz,raiz->produccion.toStdString().c_str());
         for(int i=0;i<raiz->hijos.length();i++){
         fprintf(f,"nodo%d ->nodo%d;\n", raiz,raiz->hijos.at(i));

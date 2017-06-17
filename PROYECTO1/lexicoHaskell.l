@@ -12,7 +12,7 @@ digito [0-9]
 cadena [\"][^\"\n]+[\"]
 numero	{digito}+)|({digito}+"."{digito}+
 id {letra}({letra}|{digito}|"_")*
-caracter [\"][^\"\n][\"]
+caracter [\'][^\"\n][\']
 %%
 
 
