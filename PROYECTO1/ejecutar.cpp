@@ -36,6 +36,7 @@ Variable *objeto= new Variable();
                if(QString::compare(item->hijos[0]->produccion,"DECC_", Qt::CaseInsensitive)==0)
                {
                     objeto=procesarExpresion(item->hijos[1]);
+                    // qDebug("pass here");
                     //objeto->valor =QString::number(objeto->valor.toDouble()-1);
                     objeto=Nativo_Decc(objeto);
                     th->insertPlainText(objeto->valor);
@@ -110,6 +111,11 @@ Variable *objeto= new Variable();
                      {
                         ejecutar::ultimo=objeto;
                      }
+               } else if(QString::compare(item->hijos[0]->produccion,"REVERS", Qt::CaseInsensitive)==0)
+               {
+
+                     Nativo_Revers(item->hijos[1]);
+
                }
         }
 
@@ -155,6 +161,67 @@ Variable* ejecutar::procesarExpresion(Nodo *raiz)
         {
             /*@@@@@ ES PERMITIDO ID PERO SOLO SI ESTA DENTRO DE UNA FUNCION PORQUE PUEDE Q SEA UN PARAMETRO*/
              qDebug("es de tipo id");
+        }else if(QString::compare(raiz->hijos[0]->produccion,"NATIVAS", Qt::CaseInsensitive)==0)
+        {
+            if(QString::compare(raiz->hijos[0]->hijos[0]->produccion,"SUCC_", Qt::CaseInsensitive)==0)
+            {
+                nuevo=procesarExpresion(raiz->hijos[0]->hijos[1]);
+                nuevo=Nativo_Succ(nuevo);
+            }
+            else if(QString::compare(raiz->hijos[0]->hijos[0]->produccion,"DECC_", Qt::CaseInsensitive)==0)
+            {
+                nuevo=procesarExpresion(raiz->hijos[0]->hijos[1]);
+                nuevo=Nativo_Decc(nuevo);
+            }
+            else if(QString::compare(raiz->hijos[0]->hijos[0]->produccion,"MIN", Qt::CaseInsensitive)==0)
+            {
+                nuevo=Nativo_Min(raiz->hijos[0]->hijos[1]);
+                if(QString::compare(nuevo->tipo,"ERROR",Qt::CaseInsensitive)==0)
+                {
+                    return nuevo;
+                }else if(QString::compare(nuevo->tipo,"CARACTER",Qt::CaseInsensitive)==0)
+                {
+                    nuevo->tipo="ERROR";
+                    nuevo->valor="No se puede operar miembro de tipo CARACTER";
+                }else
+                {
+                    return nuevo;
+                }
+            }
+            else if(QString::compare(raiz->hijos[0]->hijos[0]->produccion,"MAX", Qt::CaseInsensitive)==0)
+            {
+                nuevo=Nativo_Max(raiz->hijos[0]->hijos[1]);
+                if(QString::compare(nuevo->tipo,"ERROR",Qt::CaseInsensitive)==0)
+                {
+                    return nuevo;
+                }else if(QString::compare(nuevo->tipo,"CARACTER",Qt::CaseInsensitive)==0)
+                {
+                    nuevo->tipo="ERROR";
+                    nuevo->valor="No se puede operar miembro de tipo CARACTER";
+                }else
+                {
+                    return nuevo;
+                }
+            } else if(QString::compare(raiz->hijos[0]->hijos[0]->produccion,"LENGTH", Qt::CaseInsensitive)==0)
+            {
+                nuevo=Nativo_Length(raiz->hijos[0]->hijos[1]);
+                return nuevo;
+            }else if(QString::compare(raiz->hijos[0]->hijos[0]->produccion,"SUM", Qt::CaseInsensitive)==0)
+            {
+                nuevo=Nativo_Sum(raiz->hijos[0]->hijos[1]);
+                return nuevo;
+            }
+            else if(QString::compare(raiz->hijos[0]->hijos[0]->produccion,"PRODUCT", Qt::CaseInsensitive)==0)
+            {
+                nuevo=Nativo_Product(raiz->hijos[0]->hijos[1]);
+                return nuevo;
+            }
+            else
+            {
+                nuevo->tipo="ERROR";
+                nuevo->valor="Operacion Nativa "+raiz->hijos[0]->hijos[0]->produccion+" devuelve una lista";
+            }
+
         }
         else
         {
@@ -366,18 +433,79 @@ Variable* ejecutar::procesarExpresion(Nodo *raiz)
 return objeto;
 
 }
+/*   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+/*   %%%%%%%%%%%%%%%%%%%% NATIVAS COMPUESTAS %%%%%%%%%%%%%%%%%%%%%% */
+/*   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+Nodo* ejecutar::Nativo_Concatenar(Nodo* listaA,Nodo* listaB)
+{
 
+}
+
+Nodo* ejecutar::Nativo_Revers(Nodo* raiz)
+{
+    Nodo* nuevo= new Nodo();
+    if(QString::compare(raiz->hijos[0]->produccion,"CADENA", Qt::CaseInsensitive)==0)
+    {
+       nuevo->produccion="LISTA";
+       QString palabra= raiz->hijos[1]->produccion.replace("\""," ");
+       palabra=palabra.trimmed();
+       int i;
+       for(i=0;i<palabra.length();i++)
+       {
+
+           QString w =palabra.at(palabra.length()-1-i);
+           Nodo* padre= new Nodo("E");
+           Nodo* hijo = new Nodo("CARACTER");
+           padre->hijos.append(hijo);
+           hijo->hijos.append(new Nodo(w));
+           nuevo->hijos.append(padre);
+       }
+    }else if(QString::compare(raiz->hijos[0]->produccion,"DEFICION", Qt::CaseInsensitive)==0)
+    {
+         Variable* a=Tipo_Lista(raiz->hijos[1]);
+          if(QString::compare(a->tipo,"ERROR", Qt::CaseInsensitive)!=0)
+          {
+                nuevo->produccion="LISTA";
+                int i;
+                int j=raiz->hijos[1]->hijos.size();
+                for(i=0;i<j;i++)
+                {
+
+                    nuevo->hijos.append(raiz->hijos[1]->hijos[j-1-i]);
+                }
+
+          }else
+          {
+              nuevo->produccion="ERROR";
+              nuevo->hijos.append(new Nodo("LA LISTA NO TIENE MIEMBROS DEL MISMO TIPO"));
+          }
+
+    }else
+    {
+        /*es un id hay que traerlo a la tabla de simbolos*/
+    }
+
+
+    return nuevo;
+}
+
+/*   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+/*   %%%%%%%%%%%%%%%%%%%%%% NATIVAS SIMPLES %%%%%%%%%%%%%%%%%%%%%%% */
+/*   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
 
 Variable* ejecutar::Nativo_Succ(Variable* objeto)
 {
     objeto->valor=QString::number(objeto->valor.toDouble()+1);
     return objeto;
 }
+
+
 Variable* ejecutar::Nativo_Decc(Variable* objeto)
 {
     objeto->valor=QString::number(objeto->valor.toDouble()-1);
     return objeto;
 }
+
 Variable* ejecutar::Nativo_Min(Nodo* raiz)
 {
     Variable*nuevo = new Variable();
@@ -445,7 +573,7 @@ Variable* ejecutar::Nativo_Min(Nodo* raiz)
         }else
         {
             nuevo->tipo="ERROR";
-            nuevo->valor="LA LISTA NO TIENE MIEMBROS DEL MISMO TIEMPO";
+            nuevo->valor="LA LISTA NO TIENE MIEMBROS DEL MISMO TIPO";
         }
 
     }else
@@ -456,6 +584,7 @@ Variable* ejecutar::Nativo_Min(Nodo* raiz)
 
     return nuevo;
 }
+
 Variable* ejecutar::Nativo_Max(Nodo* raiz)
 {
     Variable*nuevo = new Variable();
@@ -534,6 +663,7 @@ Variable* ejecutar::Nativo_Max(Nodo* raiz)
 
     return nuevo;
 }
+
 Variable* ejecutar::Tipo_Lista(Nodo* raiz)
 {
     QString ant="";
@@ -580,6 +710,7 @@ Variable* ejecutar::Tipo_Lista(Nodo* raiz)
     nueva->tipo=act;
     return nueva;
 }
+
 Variable* ejecutar::Nativo_Length(Nodo* raiz)
 {
     Variable*nuevo = new Variable();
@@ -655,6 +786,7 @@ Variable* ejecutar::Nativo_Sum(Nodo* raiz)
         return nuevo;
 
 }
+
 Variable* ejecutar::Nativo_Product(Nodo* raiz)
 {
     Variable*nuevo = new Variable();
@@ -697,3 +829,4 @@ Variable* ejecutar::Nativo_Product(Nodo* raiz)
         return nuevo;
 
 }
+

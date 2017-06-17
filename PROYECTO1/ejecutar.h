@@ -30,6 +30,12 @@ public:
     Variable* Nativo_Length(Nodo* raiz);
     Variable* Nativo_Sum(Nodo* raiz);
     Variable* Nativo_Product(Nodo* raiz);
+    Nodo* Nativo_Revers(Nodo* raiz);
+    /*Nodo* Nativo_Asc(Nodo* raiz);
+    Nodo* Nativo_Desc(Nodo* raiz);
+    Nodo* Nativo_Impar(Nodo* raiz);
+    Nodo* Nativo_Par(Nodo* raiz);*/
+    Nodo* Nativo_Concatenar(Nodo* listaA,Nodo* listaB);
 
 
 };
