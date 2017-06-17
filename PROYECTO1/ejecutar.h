@@ -25,8 +25,11 @@ public:
     Variable* Nativo_Succ(Variable* objeto);
     Variable* Nativo_Decc(Variable* objeto);
     Variable* Nativo_Min(Nodo* raiz);
-    /*Variable* Nativo_Max(Nodo* raiz);
-    Variable* Nativo_Length(Nodo* raiz);*/
+    Variable* Tipo_Lista(Nodo* raiz);
+    Variable* Nativo_Max(Nodo* raiz);
+    Variable* Nativo_Length(Nodo* raiz);
+    Variable* Nativo_Sum(Nodo* raiz);
+    Variable* Nativo_Product(Nodo* raiz);
 
 
 };

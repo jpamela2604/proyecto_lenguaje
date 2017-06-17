@@ -1928,7 +1928,7 @@ yyreduce:
 
   case 51:
 #line 433 "gramaticahaskell.y" /* yacc.c:1646  */
-    {
+    {       //T
                                 Nodo *padre= new Nodo("NATIVAS");
                                 padre->hijos.append(new Nodo("MIN"));
                                 padre->hijos.append((yyvsp[-1].nodo));
@@ -1939,7 +1939,7 @@ yyreduce:
 
   case 52:
 #line 440 "gramaticahaskell.y" /* yacc.c:1646  */
-    {
+    {       //T
                                 Nodo *padre= new Nodo("NATIVAS");
                                 padre->hijos.append(new Nodo("MAX"));
                                 padre->hijos.append((yyvsp[-1].nodo));
@@ -1950,7 +1950,7 @@ yyreduce:
 
   case 53:
 #line 447 "gramaticahaskell.y" /* yacc.c:1646  */
-    {
+    {       //T
                                 Nodo *padre= new Nodo("NATIVAS");
                                 padre->hijos.append(new Nodo("SUM"));
                                 padre->hijos.append((yyvsp[-1].nodo));
@@ -1961,7 +1961,7 @@ yyreduce:
 
   case 54:
 #line 454 "gramaticahaskell.y" /* yacc.c:1646  */
-    {
+    {       //T
                                 Nodo *padre= new Nodo("NATIVAS");
                                 padre->hijos.append(new Nodo("PRODUCT"));
                                 padre->hijos.append((yyvsp[-1].nodo));
@@ -1973,7 +1973,7 @@ yyreduce:
 
   case 55:
 #line 462 "gramaticahaskell.y" /* yacc.c:1646  */
-    {
+    {       //T
                                 Nodo *padre= new Nodo("NATIVAS");
                                 padre->hijos.append(new Nodo("LENGTH"));
                                 padre->hijos.append((yyvsp[-1].nodo));

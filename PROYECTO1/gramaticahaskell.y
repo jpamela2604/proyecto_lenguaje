@@ -429,37 +429,37 @@ NATIVAS			: 	dolar succ_ T dolar
                                 padre->hijos.append($3);
                                 $$=padre;
                         }
-			|	dolar min T dolar
-                        {
+                        |	dolar min T dolar
+                        {       //T
                                 Nodo *padre= new Nodo("NATIVAS");
                                 padre->hijos.append(new Nodo("MIN"));
                                 padre->hijos.append($3);
                                 $$=padre;
                         }
-			|	dolar max T dolar
-                        {
+                        |	dolar max T dolar
+                        {       //T
                                 Nodo *padre= new Nodo("NATIVAS");
                                 padre->hijos.append(new Nodo("MAX"));
                                 padre->hijos.append($3);
                                 $$=padre;
                         }
                         |	dolar sum  T dolar
-                        {
+                        {       //T
                                 Nodo *padre= new Nodo("NATIVAS");
                                 padre->hijos.append(new Nodo("SUM"));
                                 padre->hijos.append($3);
                                 $$=padre;
                         }
-			|	dolar product  T  dolar 
-                        {
+                        |	dolar product  T  dolar
+                        {       //T
                                 Nodo *padre= new Nodo("NATIVAS");
                                 padre->hijos.append(new Nodo("PRODUCT"));
                                 padre->hijos.append($3);
                                 $$=padre;
 
                         }
-			|	dolar length  T  dolar 
-                        {
+                        |	dolar length  T  dolar
+                        {       //T
                                 Nodo *padre= new Nodo("NATIVAS");
                                 padre->hijos.append(new Nodo("LENGTH"));
                                 padre->hijos.append($3);
