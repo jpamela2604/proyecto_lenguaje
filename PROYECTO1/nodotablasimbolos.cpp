@@ -10,6 +10,11 @@ NodoTablaSimbolos::NodoTablaSimbolos(QString id,Nodo* codigo,QList<QString> Para
     this->rol="FUNCION";
     this->Codigo=codigo;
     this->Parametros=Parametros;
+    this->valor="";
+    this->Dim1=0;
+    this->Dim2=0;
+    this->NoDim=0;
+
 }
 NodoTablaSimbolos::NodoTablaSimbolos(QString id,Nodo* codigo)
 {
@@ -19,6 +24,10 @@ NodoTablaSimbolos::NodoTablaSimbolos(QString id,Nodo* codigo)
     this->Codigo=codigo;
     QList<QString> a;
     this->Parametros= a;
+    this->valor="";
+    this->Dim1=0;
+    this->Dim2=0;
+    this->NoDim=0;
 
 }
 NodoTablaSimbolos::NodoTablaSimbolos(QString id,QString tipo,int ambito,QString valor,int noDim)
@@ -29,5 +38,11 @@ NodoTablaSimbolos::NodoTablaSimbolos(QString id,QString tipo,int ambito,QString 
     this->tipo=tipo;
     this->valor=valor;
     this->NoDim=noDim;
+    this->Dim1=0;
+    this->Dim2=0;
+    this->Codigo=NULL;
+    QList<QString> a;
+    this->Parametros= a;
+
 
 }

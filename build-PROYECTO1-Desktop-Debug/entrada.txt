@@ -1,1 +1,1 @@
-$IncrementaSegunN {5,4}$
+$IncrementaSegunN{1,2}$

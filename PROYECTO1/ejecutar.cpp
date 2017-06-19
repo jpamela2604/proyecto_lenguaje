@@ -177,15 +177,18 @@ Variable* ejecutar::procesarExpresion(Nodo *raiz)
             {
                 NodoTablaSimbolos* a=new NodoTablaSimbolos();
                 a=actual.value(id);
-                if(QString::compare(a->tipo,"NUMBER",Qt::CaseInsensitive)==0)
+                if(QString::compare(a->tipo,"NUMBER",Qt::CaseInsensitive)==0||
+                        QString::compare(a->tipo,"NUMERO",Qt::CaseInsensitive)==0)
                 {
-                    objeto->tipo=a->tipo;
+                    objeto->tipo="NUMBER";
                     objeto->valor=a->valor;
+                    return objeto;
 
                 }else
                 {
                     objeto->tipo="ERROR";
                     objeto->valor="No se puede operar miembro del tipo "+a->tipo;
+                    return objeto;
                 }
 
 
