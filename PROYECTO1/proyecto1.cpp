@@ -31,6 +31,8 @@ extern FILE *zzin;
 QVector<QString> vectorrrr(20);
 //QString rutaDeArchivos="/home/pam/Desktop/";
 QString rutaDeArchivos="/home/pam/Desktop/Entradascorrectas/Entradascorrectas";
+ejecutar * e= new ejecutar();
+
 PROYECTO1::PROYECTO1(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::PROYECTO1)
@@ -98,7 +100,7 @@ void PROYECTO1::on_BtnTraducir_clicked()
              }
             /* ejecutar * e= new ejecutar();
              e->procesarHaskell(root,ui->Consola);*/
-
+             e->CargarFuncionesHaskell(root);
 
 
          }
@@ -117,7 +119,7 @@ void PROYECTO1::on_BtnTraducir_clicked()
             }*/
         }
 }
-ejecutar * e= new ejecutar();
+
 void PROYECTO1::on_LineaComandos_returnPressed()
 {
     if(ui->LineaComandos->text().length()>0){

@@ -1,1 +1,1 @@
-$calcular 5+$revers[2,3,5,7]$$
+$IncrementaSegunN {5,4}$

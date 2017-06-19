@@ -55,7 +55,8 @@ SOURCES       = ../PROYECTO1/main.cpp \
 		../PROYECTO1/gramaticahaskell.cpp \
 		../PROYECTO1/nodo.cpp \
 		../PROYECTO1/ejecutar.cpp \
-		../PROYECTO1/variable.cpp moc_proyecto1.cpp \
+		../PROYECTO1/variable.cpp \
+		../PROYECTO1/nodotablasimbolos.cpp moc_proyecto1.cpp \
 		moc_form.cpp
 OBJECTS       = main.o \
 		proyecto1.o \
@@ -65,6 +66,7 @@ OBJECTS       = main.o \
 		nodo.o \
 		ejecutar.o \
 		variable.o \
+		nodotablasimbolos.o \
 		moc_proyecto1.o \
 		moc_form.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -131,14 +133,16 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../PROYECTO1/gramaticahaskell.h \
 		../PROYECTO1/nodo.h \
 		../PROYECTO1/ejecutar.h \
-		../PROYECTO1/variable.h ../PROYECTO1/main.cpp \
+		../PROYECTO1/variable.h \
+		../PROYECTO1/nodotablasimbolos.h ../PROYECTO1/main.cpp \
 		../PROYECTO1/proyecto1.cpp \
 		../PROYECTO1/form.cpp \
 		../PROYECTO1/lexicoHaskell.cpp \
 		../PROYECTO1/gramaticahaskell.cpp \
 		../PROYECTO1/nodo.cpp \
 		../PROYECTO1/ejecutar.cpp \
-		../PROYECTO1/variable.cpp
+		../PROYECTO1/variable.cpp \
+		../PROYECTO1/nodotablasimbolos.cpp
 QMAKE_TARGET  = PROYECTO1
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = PROYECTO1
@@ -308,8 +312,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../PROYECTO1/proyecto1.h ../PROYECTO1/form.h ../PROYECTO1/lexicoHaskell.h ../PROYECTO1/gramaticahaskell.h ../PROYECTO1/nodo.h ../PROYECTO1/ejecutar.h ../PROYECTO1/variable.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../PROYECTO1/main.cpp ../PROYECTO1/proyecto1.cpp ../PROYECTO1/form.cpp ../PROYECTO1/lexicoHaskell.cpp ../PROYECTO1/gramaticahaskell.cpp ../PROYECTO1/nodo.cpp ../PROYECTO1/ejecutar.cpp ../PROYECTO1/variable.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../PROYECTO1/proyecto1.h ../PROYECTO1/form.h ../PROYECTO1/lexicoHaskell.h ../PROYECTO1/gramaticahaskell.h ../PROYECTO1/nodo.h ../PROYECTO1/ejecutar.h ../PROYECTO1/variable.h ../PROYECTO1/nodotablasimbolos.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../PROYECTO1/main.cpp ../PROYECTO1/proyecto1.cpp ../PROYECTO1/form.cpp ../PROYECTO1/lexicoHaskell.cpp ../PROYECTO1/gramaticahaskell.cpp ../PROYECTO1/nodo.cpp ../PROYECTO1/ejecutar.cpp ../PROYECTO1/variable.cpp ../PROYECTO1/nodotablasimbolos.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../PROYECTO1/proyecto1.ui ../PROYECTO1/form.ui $(DISTDIR)/
 
 
@@ -372,7 +376,9 @@ proyecto1.o: ../PROYECTO1/proyecto1.cpp ../PROYECTO1/proyecto1.h \
 		../PROYECTO1/lexicoHaskell.h \
 		../PROYECTO1/gramaticahaskell.h \
 		../PROYECTO1/nodo.h \
-		../PROYECTO1/ejecutar.h
+		../PROYECTO1/ejecutar.h \
+		../PROYECTO1/variable.h \
+		../PROYECTO1/nodotablasimbolos.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o proyecto1.o ../PROYECTO1/proyecto1.cpp
 
 form.o: ../PROYECTO1/form.cpp ../PROYECTO1/form.h \
@@ -390,11 +396,16 @@ nodo.o: ../PROYECTO1/nodo.cpp ../PROYECTO1/nodo.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o nodo.o ../PROYECTO1/nodo.cpp
 
 ejecutar.o: ../PROYECTO1/ejecutar.cpp ../PROYECTO1/ejecutar.h \
-		../PROYECTO1/nodo.h
+		../PROYECTO1/nodo.h \
+		../PROYECTO1/variable.h \
+		../PROYECTO1/nodotablasimbolos.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ejecutar.o ../PROYECTO1/ejecutar.cpp
 
 variable.o: ../PROYECTO1/variable.cpp ../PROYECTO1/variable.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o variable.o ../PROYECTO1/variable.cpp
+
+nodotablasimbolos.o: ../PROYECTO1/nodotablasimbolos.cpp ../PROYECTO1/nodotablasimbolos.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o nodotablasimbolos.o ../PROYECTO1/nodotablasimbolos.cpp
 
 moc_proyecto1.o: moc_proyecto1.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_proyecto1.o moc_proyecto1.cpp

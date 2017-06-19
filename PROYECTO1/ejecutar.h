@@ -13,14 +13,25 @@
 #include <variable.h>
 #include <QMessageBox>
 #include <QPlainTextEdit>
+#include <QStack>
+#include <QHash>
+#include <nodotablasimbolos.h>
 
 class ejecutar
 {
 public:
     ejecutar();
     static Variable* ultimo;
+    /*      TABLA DE SIMBOLOS       */
+    static QHash<QString,NodoTablaSimbolos*> Metodosglobales;
+    QHash<QString,NodoTablaSimbolos*> actual;
+    static QStack<QHash<QString,NodoTablaSimbolos*> > TS;
+    static int ambito;
+
+    /*        METODOS DE CONSOLA    */
     void procesarHaskell(Nodo *raiz,QPlainTextEdit* th);
     Variable* procesarExpresion(Nodo *raiz);
+
     /*      NATIVOS         */
     Variable* Nativo_Succ(Variable* objeto);
     Variable* Nativo_Decc(Variable* objeto);
@@ -36,7 +47,12 @@ public:
     Nodo* Nativo_Impar(Nodo* raiz);
     Nodo* Nativo_Par(Nodo* raiz);*/
     Nodo* Nativo_Concatenar(Nodo* listaA,Nodo* listaB);
-
+    /*       CargarFuncionesHaskell          */
+    void CargarFuncionesHaskell(Nodo *raiz);
+    /*        LLAMAR FUNCIONES*/
+    void llamarFuncion(Nodo*raiz);
+    Variable* ejecutarCuerpo(Nodo*raiz);
+    Variable* ejecutarCondicion(Nodo *raiz);
 
 };
 

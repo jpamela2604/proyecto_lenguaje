@@ -1,6 +1,11 @@
 #include "ejecutar.h"
+/*   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+/*   %%%%%%%%%%%%%%%%%%%%%%%%% ESTATICAS %%%%%%%%%%%%%%%%%%%%%%%%%% */
+/*   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
  Variable* ejecutar::ultimo;
-
+ QHash<QString,NodoTablaSimbolos*> ejecutar::Metodosglobales;
+ QStack<QHash<QString,NodoTablaSimbolos*> > ejecutar:: TS;
+ int ejecutar::ambito=0;
 
 ejecutar::ejecutar()
 {
@@ -29,6 +34,10 @@ Variable *objeto= new Variable();
 
         }else if (QString::compare(item->produccion, "DECLA_FUN", Qt::CaseInsensitive)==0)
         {
+
+        }else if (QString::compare(item->produccion, "LLAMADA_FUN", Qt::CaseInsensitive)==0)
+        {
+             llamarFuncion(item);
 
         }
         else if (QString::compare(item->produccion, "NATIVAS", Qt::CaseInsensitive)==0)
@@ -152,6 +161,9 @@ Variable* ejecutar::procesarExpresion(Nodo *raiz)
         {
             /*@@@@@ BUSCAR EN LA TABLA DE SIMBOLOS Y EJECUTAR FUNCION
             COMPROBAR QUE DEVUELVA NUMERO*/
+
+            ;
+
         }else if(QString::compare(raiz->hijos[0]->produccion,"ACCESO", Qt::CaseInsensitive)==0)
         {
             /*@@@@@ BUSCAR EN LA TABLA DE SIMBOLOS, TRATAR DE ACCEDER A LOS INDICES
@@ -160,6 +172,28 @@ Variable* ejecutar::procesarExpresion(Nodo *raiz)
                 QString::compare(raiz->hijos[0]->hijos[0]->produccion,"ID", Qt::CaseInsensitive)==0 )
         {
             /*@@@@@ ES PERMITIDO ID PERO SOLO SI ESTA DENTRO DE UNA FUNCION PORQUE PUEDE Q SEA UN PARAMETRO*/
+            QString id=raiz->hijos[0]->hijos[1]->produccion;
+            if(actual.contains(id))
+            {
+                NodoTablaSimbolos* a=new NodoTablaSimbolos();
+                a=actual.value(id);
+                if(QString::compare(a->tipo,"NUMBER",Qt::CaseInsensitive)==0)
+                {
+                    objeto->tipo=a->tipo;
+                    objeto->valor=a->valor;
+
+                }else
+                {
+                    objeto->tipo="ERROR";
+                    objeto->valor="No se puede operar miembro del tipo "+a->tipo;
+                }
+
+
+            }else
+            {
+                objeto->tipo="ERROR";
+                objeto->valor="Variable no existe";
+            }
              qDebug("es de tipo id");
         }else if(QString::compare(raiz->hijos[0]->produccion,"NATIVAS", Qt::CaseInsensitive)==0)
         {
@@ -222,6 +256,10 @@ Variable* ejecutar::procesarExpresion(Nodo *raiz)
                 nuevo->valor="Operacion Nativa "+raiz->hijos[0]->hijos[0]->produccion+" devuelve una lista";
             }
 
+        }
+        else if(QString::compare(raiz->hijos[0]->produccion,"E", Qt::CaseInsensitive)==0)
+        {
+            nuevo=procesarExpresion(raiz->hijos[0]);
         }
         else
         {
@@ -433,12 +471,241 @@ Variable* ejecutar::procesarExpresion(Nodo *raiz)
 return objeto;
 
 }
+
+/*   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+/*   %%%%%%%%%%%%%%%%%%%%%% LLAMAR FUNCIONES %%%%%%%%%%%%%%%%%%%%%% */
+/*   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+
+void ejecutar::llamarFuncion(Nodo*raiz)
+{
+    QString id=raiz->hijos[0]->produccion;
+    if(Metodosglobales.contains(id))
+    {
+        NodoTablaSimbolos * nts=Metodosglobales.value(id);
+        if(nts->Parametros.size()!=0)
+        {   /*Funcion con Parametros*/
+
+            //verificar que la cantidad de parametros enviadas sean las misma que los creados
+            if(nts->Parametros.size()==raiz->hijos[1]->hijos.size())
+            {
+
+                ejecutar::ambito=ejecutar::ambito+1;
+                ejecutar::TS.push(actual);
+                actual.clear();
+
+                //Crear las variables de los parametros
+                int i=0;
+                foreach(Nodo* item,raiz->hijos[1]->hijos)
+                {
+                    QString id=nts->Parametros[i];
+                    i++;
+                    QString tipo=item->hijos[0]->produccion;
+                    QString valor=item->hijos[0]->hijos[0]->produccion;
+                    int numDimen=0;
+                    NodoTablaSimbolos* novo=new NodoTablaSimbolos(id,tipo,ejecutar::ambito,valor,numDimen);
+                    if(actual.contains(id))
+                    {
+                        //variable ya existe
+                    }else
+                    {
+                        actual.insert(id,novo);
+                    }
+                }
+
+                //enviar a ejecutar
+                QString w=QString::number(actual.size());
+                qDebug("el numero de parametros es"+w.toLatin1());
+                ejecutar::ejecutarCuerpo(nts->Codigo);
+                //al salir de la llamada
+                ejecutar::ambito=ejecutar::ambito-1;
+                actual=ejecutar::TS.pop();
+
+            }else
+            {
+                //la cantidad de parametros no coincide
+                ejecutar::ejecutarCuerpo(nts->Codigo);
+            }
+
+
+        }else
+        {   /*Funcion sin Parametros*/
+            //verificar que la cantidad de parametros enviadas sean las misma que los creados
+            if(raiz->hijos.size()==2)
+            {
+                //error le enviaron parametros y esta definido sin ellos
+            }else
+            {
+                 //enviar a ejecutar
+            }
+
+
+
+        }
+
+
+    }else
+    {
+        //funcion no encontrada
+    }
+}
+
+Variable* ejecutar::ejecutarCuerpo(Nodo*raiz)
+{
+    Variable*objeto=new Variable();
+    foreach(Nodo * item,raiz->hijos)
+    {
+        if(QString::compare(item->produccion,"IF",Qt::CaseInsensitive)==0)
+        {
+            Variable* cond= new Variable();
+            cond=ejecutarCondicion(item->hijos[0]);
+            if(QString::compare(cond->valor,"TRUE",Qt::CaseInsensitive)==0)
+            {
+                objeto=ejecutarCuerpo(item->hijos[1]);
+
+            }else if(QString::compare(cond->valor,"FALSE",Qt::CaseInsensitive)==0)
+            {
+                objeto=ejecutarCuerpo(item->hijos[2]);
+            }
+        }else if(QString::compare(item->produccion,"CASE",Qt::CaseInsensitive)==0)
+        {
+            //###traer el valor de case y el tipo
+            QString valor;
+            int i=0;
+            int bandera=0;
+            foreach (Nodo* caso, item->hijos[1]->hijos) {
+                //###traer el valor y tipo de la comparacion
+                QString compar=caso->produccion;
+                i++;
+                if(QString::compare(valor,compar,Qt::CaseInsensitive)==0)
+                {
+                    bandera=1;
+                    break;
+                }
+            }
+            if(bandera==1)
+            {
+               objeto=ejecutarCuerpo(item->hijos[1]->hijos[i]);
+
+            }else
+            {
+                //no coincide con ningun caso
+            }
+        }
+
+    }
+
+    return objeto;
+}
+Variable* ejecutar::ejecutarCondicion(Nodo *raiz)
+{
+     Variable*objeto=new Variable();
+     if(raiz->hijos.size()==3&&QString::compare(raiz->hijos[0]->produccion,"E",Qt::CaseInsensitive)==0)
+     {
+         Variable*op1=procesarExpresion(raiz->hijos[0]);
+         Variable*op2=procesarExpresion(raiz->hijos[2]);
+         if(QString::compare(op1->tipo,"ERROR",Qt::CaseInsensitive)!=0&&QString::compare(op2->tipo,"ERROR",Qt::CaseInsensitive)!=0)
+         {
+             bool a=false;
+             if(QString::compare(raiz->hijos[1]->produccion,">",Qt::CaseInsensitive)==0)
+             {
+                a=op1->valor.toDouble()>op2->valor.toDouble();
+
+             }else if(QString::compare(raiz->hijos[1]->produccion,"<",Qt::CaseInsensitive)==0)
+             {
+                 a=op1->valor.toDouble()>op2->valor.toDouble();
+
+             }else if(QString::compare(raiz->hijos[1]->produccion,">=",Qt::CaseInsensitive)==0)
+             {
+                 a=op1->valor.toDouble()>=op2->valor.toDouble();
+
+             }else if(QString::compare(raiz->hijos[1]->produccion,"<=",Qt::CaseInsensitive)==0)
+             {
+                 a=op1->valor.toDouble()<=op2->valor.toDouble();
+
+             }else if(QString::compare(raiz->hijos[1]->produccion,"==",Qt::CaseInsensitive)==0)
+             {
+                 a=op1->valor.toDouble()==op2->valor.toDouble();
+             }
+             else if(QString::compare(raiz->hijos[1]->produccion,"!=",Qt::CaseInsensitive)==0)
+             {
+                a=op1->valor.toDouble()!=op2->valor.toDouble();
+             }
+
+             objeto->tipo="BOOL";
+             if(a==false)
+             {
+                objeto->valor="FALSE";
+             }else
+             {
+                 objeto->valor="TRUE";
+             }
+
+         }else
+         {
+             if(QString::compare(op1->tipo,"ERROR",Qt::CaseInsensitive)==0)
+             {
+                 return op1;
+             }else{return op2;}
+         }
+
+
+     }else if(raiz->hijos.size()==3&&QString::compare(raiz->hijos[0]->produccion,"COND",Qt::CaseInsensitive)==0)
+     {
+         Variable*op1=ejecutarCondicion(raiz->hijos[0]);
+         Variable*op2=ejecutarCondicion(raiz->hijos[2]);
+         if(QString::compare(op1->tipo,"ERROR",Qt::CaseInsensitive)!=0&&QString::compare(op2->tipo,"ERROR",Qt::CaseInsensitive)!=0)
+         {
+             bool a=false;
+             bool b1=false;
+             bool b2=false;
+             if(QString::compare(op1->valor,"TRUE",Qt::CaseInsensitive)==0)
+             { b1=true; }
+             if(QString::compare(op2->valor,"TRUE",Qt::CaseInsensitive)==0)
+             { b2=true; }
+             if(QString::compare(raiz->hijos[1]->produccion,"&&",Qt::CaseInsensitive)==0)
+             {
+                a=b1&&b2;
+
+             }else if(QString::compare(raiz->hijos[1]->produccion,"||",Qt::CaseInsensitive)==0)
+             {
+                a=b1||b2;
+             }
+             objeto->tipo="BOOL";
+             if(a==false)
+             {
+                objeto->valor="FALSE";
+             }else
+             {
+                 objeto->valor="TRUE";
+             }
+
+
+         }else
+         {
+             if(QString::compare(op1->tipo,"ERROR",Qt::CaseInsensitive)==0)
+             {
+                 return op1;
+             }else{return op2;}
+         }
+
+
+     }else
+     {
+         objeto=ejecutarCondicion(raiz->hijos[0]);
+     }
+
+     return objeto;
+}
 /*   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
 /*   %%%%%%%%%%%%%%%%%%%% NATIVAS COMPUESTAS %%%%%%%%%%%%%%%%%%%%%% */
 /*   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
-Nodo* ejecutar::Nativo_Concatenar(Nodo* listaA,Nodo* listaB)
-{
 
+
+Nodo* ejecutar::Nativo_Concatenar(Nodo* listaA,Nodo* listaB)
+{ Nodo*a= new Nodo();
+    a=listaA;
+    a=listaB;
+    return a;
 }
 
 Nodo* ejecutar::Nativo_Revers(Nodo* raiz)
@@ -489,9 +756,11 @@ Nodo* ejecutar::Nativo_Revers(Nodo* raiz)
     return nuevo;
 }
 
+
 /*   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
 /*   %%%%%%%%%%%%%%%%%%%%%% NATIVAS SIMPLES %%%%%%%%%%%%%%%%%%%%%%% */
 /*   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+
 
 Variable* ejecutar::Nativo_Succ(Variable* objeto)
 {
@@ -534,7 +803,7 @@ Variable* ejecutar::Nativo_Min(Nodo* raiz)
     }else if(QString::compare(raiz->hijos[0]->produccion,"DEFICION", Qt::CaseInsensitive)==0)
     {
         Variable* a=Tipo_Lista(raiz->hijos[1]);
-        qDebug("LA LISTA ES DE TIPO"+a->tipo.toLatin1());
+        //qDebug("LA LISTA ES DE TIPO"+a->tipo.toLatin1());
         if(QString::compare(a->tipo,"CARACTER", Qt::CaseInsensitive)==0)
         {
             int numero=1000;
@@ -550,7 +819,7 @@ Variable* ejecutar::Nativo_Min(Nodo* raiz)
                 }
 
             }
-            qDebug("el menor valor es "+QChar(numero).toLatin1());
+            //qDebug("el menor valor es "+QChar(numero).toLatin1());
             nuevo->tipo="CARACTER";
             nuevo->valor=QChar(numero);
 
@@ -566,7 +835,7 @@ Variable* ejecutar::Nativo_Min(Nodo* raiz)
                 }
 
             }
-            qDebug("el menor valor es "+QString::number(numero).toLatin1());
+            //qDebug("el menor valor es "+QString::number(numero).toLatin1());
             nuevo->tipo="NUMBER";
             nuevo->valor=QString::number(numero).toLatin1();
 
@@ -613,7 +882,7 @@ Variable* ejecutar::Nativo_Max(Nodo* raiz)
     }else if(QString::compare(raiz->hijos[0]->produccion,"DEFICION", Qt::CaseInsensitive)==0)
     {
         Variable* a=Tipo_Lista(raiz->hijos[1]);
-        qDebug("LA LISTA ES DE TIPO"+a->tipo.toLatin1());
+        //qDebug("LA LISTA ES DE TIPO"+a->tipo.toLatin1());
         if(QString::compare(a->tipo,"CARACTER", Qt::CaseInsensitive)==0)
         {
             int numero=0;
@@ -629,7 +898,7 @@ Variable* ejecutar::Nativo_Max(Nodo* raiz)
                 }
 
             }
-            qDebug("el mayor valor es "+QChar(numero).toLatin1());
+            //qDebug("el mayor valor es "+QChar(numero).toLatin1());
             nuevo->tipo="CARACTER";
             nuevo->valor=QChar(numero);
 
@@ -645,7 +914,7 @@ Variable* ejecutar::Nativo_Max(Nodo* raiz)
                 }
 
             }
-            qDebug("el mayor valor es "+QString::number(numero).toLatin1());
+           // qDebug("el mayor valor es "+QString::number(numero).toLatin1());
             nuevo->tipo="NUMBER";
             nuevo->valor=QString::number(numero).toLatin1();
 
@@ -830,3 +1099,51 @@ Variable* ejecutar::Nativo_Product(Nodo* raiz)
 
 }
 
+
+/*   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+/*   %%%%%%%%%%%%%%%%%% CargarFuncionesHaskell %%%%%%%%%%%%%%%%%%%% */
+/*   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
+
+
+void ejecutar::CargarFuncionesHaskell(Nodo *raiz)
+{
+    foreach(Nodo* item,raiz->hijos)
+    {
+        if(QString::compare(item->produccion,"DECLA_FUN",Qt::CaseInsensitive)==0)
+        {
+
+            if(item->hijos.size()==3)
+            {
+                QList<QString> p;
+                foreach(Nodo *coso,item->hijos[1]->hijos)
+                {
+                    p.append(coso->produccion);
+                }
+                Nodo * cod= new Nodo();
+                cod=item->hijos[2];
+                QString id=item->hijos[0]->produccion;
+                NodoTablaSimbolos* nuevo=new NodoTablaSimbolos(id,cod,p);
+                if(Metodosglobales.contains(id)==false)
+                {
+                    Metodosglobales.insert(id,nuevo);
+                }
+
+            }else if(item->hijos.size()==2)
+            {
+                Nodo * cod= new Nodo();
+                cod=item->hijos[2];
+                QString id=item->hijos[0]->produccion;
+                NodoTablaSimbolos* nuevo=new NodoTablaSimbolos(id,cod);
+                if(Metodosglobales.contains(id)==false)
+                {
+                    Metodosglobales.insert(id,nuevo);
+                }
+            }
+
+        }
+    }
+    /*QString se=QString::number(Metodosglobales.size());
+    qDebug("numero"+se.toLatin1());*/
+    actual=ejecutar::Metodosglobales;
+
+}

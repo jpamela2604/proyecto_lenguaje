@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     gramaticahaskell.cpp \
     nodo.cpp \
     ejecutar.cpp \
-    variable.cpp
+    variable.cpp \
+    nodotablasimbolos.cpp
 
 HEADERS  += proyecto1.h \
     form.h \
@@ -27,7 +28,8 @@ HEADERS  += proyecto1.h \
     gramaticahaskell.h \
     nodo.h \
     ejecutar.h \
-    variable.h
+    variable.h \
+    nodotablasimbolos.h
 
 FORMS    += proyecto1.ui \
     form.ui
